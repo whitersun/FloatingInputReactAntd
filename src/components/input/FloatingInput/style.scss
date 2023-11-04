@@ -1,0 +1,97 @@
+.floating-input {
+    display: block;
+    position: relative;
+    margin-bottom: 10px;
+
+    width: 100%;
+    height: auto;
+
+    .floating-title {
+        display: inline-block;
+        position: absolute;
+    
+        top: 52%;
+        left: 12px;
+
+        transform: translateY(-50%) scale(1);
+        transition: all 0.2s ease;
+
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        vertical-align: baseline;
+
+        &.floating-active {
+            top: 25%;
+            left: 0;
+            transform: translateY(-50%) scale(0.75);
+        }
+    }
+
+    .floating-control {
+        display: block;
+        position: relative;
+
+        width: 100%;
+        padding: 1.5rem 11px 0.75rem 11px;
+
+        &::-webkit-input-placeholder {
+            opacity: 0;
+        }
+
+        &:focus {
+            &::-webkit-input-placeholder {
+                opacity: 1;
+            }
+        }
+    }
+
+    .floating-textarea {
+        
+        .floating-title {
+            top: 27%;
+
+            &.floating-active {
+                top: 12%;
+                left: 6px;
+                transform: translateY(-50%) scale(0.75);
+            }
+        }
+
+        
+    }
+
+    .floating-datepicker {
+
+        .floating-title {
+            &.floating-active {
+                top: 25%;
+                left: 2px;
+                transform: translateY(-50%) scale(0.75);
+            }
+        }
+
+        .ant-space,
+        .ant-picker {
+            width: 100%;
+        }
+
+        .ant-picker {
+            .ant-picker-input {
+                input {
+                    &::-webkit-input-placeholder {
+                        opacity: 0;
+                    }
+
+                    &:focus {
+                        &::-webkit-input-placeholder {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
