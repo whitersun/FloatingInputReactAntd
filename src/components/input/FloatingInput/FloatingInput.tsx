@@ -8,18 +8,20 @@ import TextArea from "antd/es/input/TextArea";
 type TypeInput = 'number' | 'text' | 'password' | 'textarea' | 'select' | 'date' | 'datepicker';
 
 type PropsFloatingInput = {
-    title: string,
+    label: string,
     type: TypeInput,
+    name?: string,
     min?: number,
     max?: number,
     defaultValue?: string,
     keyboard?: boolean,
     placeholder?: string,
+    classes?: string
     onChange?: (value: string) => void
 }
 
 export const FloatingInput = (props: PropsFloatingInput) => {
-    const { type, title, min, max, keyboard, defaultValue, placeholder } = props;
+    const { type, name, label, min, max, keyboard, defaultValue, placeholder, classes } = props;
 
     const [value, setValue] = useState('');
     const [floating, setFloating] = useState(false);
@@ -29,6 +31,15 @@ export const FloatingInput = (props: PropsFloatingInput) => {
         : setFloating(false);
 
     const onFocus = () => setFloating(true);
+
+    const onChangeValue = (event: any) => {
+        if (type === 'number') {
+            setValue(event);
+        } else {
+            setValue(event.target.value);
+        }
+
+    }
 
     const onChangeOnDatePicker: DatePickerProps['onChange'] = (date, dateString) => {
         console.log(date);
@@ -43,12 +54,14 @@ export const FloatingInput = (props: PropsFloatingInput) => {
             ${!defaultValue && floating ? 'floating-active' : ''}`;
     
         const commonProps = {
-            onChange: (event: any) => setValue(event.target.value),
+            onChange: onChangeValue,
             onBlur: onBlur,
             onFocus: onFocus
         };
     
         const inputProps = {
+            name: name,
+            classes: classes,
             className: "floating-control",
             placeholder: placeholder,
             defaultValue: defaultValue
@@ -77,37 +90,37 @@ export const FloatingInput = (props: PropsFloatingInput) => {
             placeholder: placeholder
         };
     
-        const renderInput = (type: string, props: any) => {
+        const renderInput = (type: string, renderProps: any) => {
             switch (type) {
                 case 'number':
                     return <InputNumber {...commonProps} 
-                        {...numberProps} {...props} />;
+                        {...numberProps} {...renderProps} />;
                 case 'text':
-                    return <Input {...commonProps} {...props} />;
+                    return <Input {...commonProps} {...renderProps} />;
                 case 'password':
                     return <Input.Password {...commonProps} 
-                        {...passwordProps} {...props} />;
+                        {...passwordProps} {...renderProps} />;
                 case 'textarea':
                     return <TextArea {...commonProps} 
-                        {...textareaProps} {...props} />;
+                        {...textareaProps} {...renderProps} />;
                 case 'datepicker': 
                     return <Space direction="vertical" 
                         onBlur={onBlur} onFocus={onFocus}>
-                        <DatePicker {...datePickerProps} />
+                        <DatePicker {...datePickerProps} {...renderProps} />
                     </Space>;
             }
         };
     
-        return <div className={`floating-${type}`}>
+        return <div className={`floating-${type} relative`}>
             {renderInput(type, inputProps)}
             <Typography.Title className={floatingClass(defaultValue, floating)} 
-                level={5}>{title}</Typography.Title>
+                level={5}>{label}</Typography.Title>
         </div>;
     }
 
 
     return (
-        <div className="floating-input">
+        <div className="floating-input w-full">
             {conditionRender()}
         </div>
     )

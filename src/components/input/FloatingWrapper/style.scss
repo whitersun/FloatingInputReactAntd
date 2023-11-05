@@ -1,8 +1,4 @@
 .floating-input {
-    $floatingLabelActiveTop: 15%;
-    $floatingLabelActiveLeft: 3%;
-    $floatingLabelActive: 10px;
-
     display: block;
     position: relative;
     margin-bottom: 10px;
@@ -14,24 +10,22 @@
         display: inline-block;
         position: absolute;
     
-        top: 33%;
-        // left: 12px;
-        left: 4%;
+        top: 52%;
+        left: 12px;
 
+        transform: translateY(-50%) scale(1);
         transition: all 0.2s ease;
 
         margin: 0;
         padding: 0;
         border: 0;
         outline: 0;
-
-        font-size: 16px;
         vertical-align: baseline;
 
         &.floating-active {
-            top: $floatingLabelActiveTop;
-            left: $floatingLabelActiveLeft;
-            font-size: $floatingLabelActive;
+            top: 25%;
+            left: 0;
+            transform: translateY(-50%) scale(0.75);
         }
     }
 
@@ -59,37 +53,22 @@
             top: 27%;
 
             &.floating-active {
-                top: $floatingLabelActiveTop;
-                left: $floatingLabelActiveLeft;
-                font-size: $floatingLabelActive;
+                top: 12%;
+                left: 6px;
+                transform: translateY(-50%) scale(0.75);
             }
         }
 
         
-    }
-
-    .floating-number {
-        
-        .ant-input-number {
-            padding: 1rem 11px 6px 11px;
-            
-            .ant-input-number-input-wrap {
-                margin-top: 5px;
-
-                .ant-input-number-input {
-                    padding: 4px 11px 4px 0px;
-                }
-            }
-        }
     }
 
     .floating-datepicker {
 
         .floating-title {
             &.floating-active {
-                top: $floatingLabelActiveTop;
-                left: $floatingLabelActiveLeft;
-                font-size: $floatingLabelActive;
+                top: 25%;
+                left: 2px;
+                transform: translateY(-50%) scale(0.75);
             }
         }
 
