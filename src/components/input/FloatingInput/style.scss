@@ -15,7 +15,6 @@
         position: absolute;
     
         top: 33%;
-        // left: 12px;
         left: 4%;
 
         transition: all 0.2s ease;
@@ -86,6 +85,9 @@
     .floating-datepicker {
 
         .floating-title {
+            top: 25%;
+            left: 4%;
+
             &.floating-active {
                 top: $floatingLabelActiveTop;
                 left: $floatingLabelActiveLeft;

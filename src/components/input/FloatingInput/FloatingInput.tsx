@@ -1,4 +1,4 @@
-import { DatePicker, DatePickerProps, Input, InputNumber, Space, Typography } from "antd"
+import { DatePicker, DatePickerProps, Form, Input, InputNumber, Space, Typography } from "antd"
 
 import "./style.scss";
 import { useState } from "react";
@@ -10,7 +10,7 @@ type TypeInput = 'number' | 'text' | 'password' | 'textarea' | 'select' | 'date'
 type PropsFloatingInput = {
     label: string,
     type: TypeInput,
-    name?: string,
+    name: string,
     min?: number,
     max?: number,
     defaultValue?: string,
@@ -96,17 +96,25 @@ export const FloatingInput = (props: PropsFloatingInput) => {
                     return <InputNumber {...commonProps} 
                         {...numberProps} {...renderProps} />;
                 case 'text':
-                    return <Input {...commonProps} {...renderProps} />;
+                    return <Form.Item name={name}> 
+                        <Input {...commonProps} {...renderProps} />
+                    </Form.Item>
                 case 'password':
-                    return <Input.Password {...commonProps} 
-                        {...passwordProps} {...renderProps} />;
+                    return <Form.Item name={name}>
+                        <Input.Password {...commonProps} 
+                            {...passwordProps} {...renderProps} />
+                    </Form.Item>
                 case 'textarea':
-                    return <TextArea {...commonProps} 
-                        {...textareaProps} {...renderProps} />;
+                    return <Form.Item name={name}>
+                        <TextArea {...commonProps} 
+                            {...textareaProps} {...renderProps} />
+                    </Form.Item>
                 case 'datepicker': 
                     return <Space direction="vertical" 
                         onBlur={onBlur} onFocus={onFocus}>
-                        <DatePicker {...datePickerProps} {...renderProps} />
+                        <Form.Item name={name}>
+                            <DatePicker {...datePickerProps} {...renderProps} />
+                        </Form.Item>
                     </Space>;
             }
         };

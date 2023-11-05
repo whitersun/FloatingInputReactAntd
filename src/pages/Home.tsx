@@ -1,10 +1,7 @@
 import { Button, Form } from "antd";
 import { FloatingInput } from "../components/input/FloatingInput/FloatingInput";
 
-type FieldType = {
-    username?: string,
-    email?: string
-}
+import moment from "moment";
 
 export const Home = () => {
 
@@ -17,6 +14,10 @@ export const Home = () => {
     };
     
 
+    const worker = {
+        dateOfBirth: moment(new Date())
+    };
+
     return (
         <div className="homepage max-w-7xl">
             <h1>Home</h1>
@@ -25,23 +26,16 @@ export const Home = () => {
                 <div className="layoutBox">
                     <Form
                         name="basic"
-                        initialValues={{ remember: true }}
+                        initialValues={ worker }
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
                         <div className="grid grid-cols-2 gap-5">
-                            <Form.Item<FieldType> name="username">
-                                <div className="floatingBox">
-                                    <FloatingInput classes="w-full" type="text" label="Username" />
-                                </div>
-                            </Form.Item>
+                            <FloatingInput classes="w-full" type="text" name="username" label="Username" />
+                            <FloatingInput type="text" name="email" label="Email" />
+                            <FloatingInput type="datepicker" name="startDate" label="Start Date" />
 
-                            <Form.Item<FieldType> name="email">
-                                <div className="floatingBox">
-                                    <FloatingInput type="number" label="Email" />
-                                </div>
-                            </Form.Item>
                         </div>
 
                         <Form.Item>
